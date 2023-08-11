@@ -1,6 +1,6 @@
 FROM ubuntu:latest AS builder
 
-RUN apt update && apt install -y git maven
+RUN apt update && apt install -y git
 
 WORKDIR /app
 
@@ -9,8 +9,8 @@ WORKDIR /app
 # RUN git clone -b master --single-branch https://aravind-etagi:${GITHUB_PAT}@github.com/aravind-etagi/onlinebookstore.git && \
 	# mvn -f onlinebookstore/pom.xml clean install
 
-RUN git clone -b master --single-branch https://github.com/aravind-etagi/onlinebookstore.git && \
-	mvn -f onlinebookstore/pom.xml clean install
+# RUN git clone -b master --single-branch https://github.com/aravind-etagi/onlinebookstore.git && \
+# 	mvn -f onlinebookstore/pom.xml clean install
 
 RUN git clone -b main --single-branch https://github.com/OpqTech/tomcat-config.git
 
@@ -29,6 +29,6 @@ RUN rm -rf webapps && \
 	cp ./tomcat-config/tomcat-users.xml ./conf/tomcat-users.xml && \
 	rm -rf ./tomcat-config
 	
-COPY --from=builder /app/onlinebookstore/target/*.war webapps/
+COPY onlinebookstore.war webapps/
 
 EXPOSE 8080
