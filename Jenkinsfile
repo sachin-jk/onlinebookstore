@@ -11,7 +11,7 @@ pipeline {
 
 		stage('Git Checkout') {
 			steps {
-				// If we have to clone from orivate git repo
+				// If we have to clone from private git repo
 				// git credentialsId: 'github-PAT', branch: 'master', url: 'https://github.com/aravind-etagi/Movie_recommendation_system.git'
 				git branch: 'master', url: 'https://github.com/aravind-etagi/onlinebookstore.git'
 			}
